@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ordenação de Lista</title>
+    <script>
+        function ordenarLista() {
+            const lista = document.getElementById("lista").value.split(",").map(Number);
+
+            for (let i = 0; i < lista.length - 1; i++) {
+                for (let j = 0; j < lista.length - i - 1; j++) {
+                    if (lista[j] > lista[j + 1]) {
+                        // Troca os elementos se estiverem fora de ordem
+                        const temp = lista[j];
+                        lista[j] = lista[j + 1];
+                        lista[j + 1] = temp;
+                    }
+                }
+            }
+
+            document.getElementById("resultado").innerHTML = "Resultado: Lista ordenada: [" + lista.join(", ") + "]";
+        }
+    </script>
+</head>
+<body>
+    <h1>Ordenação de Lista</h1>
+    <label for="lista">Digite a lista de números separados por vírgula:</label>
+    <input type="text" id="lista">
+    <button onclick="ordenarLista()">Ordenar</button>
+    <p id="resultado"></p>
+</body>
+</html>

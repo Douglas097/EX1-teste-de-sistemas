@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contagem de Palavras</title>
+</head>
+<body>
+    <h1>Contagem de Palavras em uma Frase</h1>
+
+    <form id="contagemForm">
+        <label for="frase">Digite a frase:</label>
+        <input type="text" id="frase" name="frase" required>
+        <button type="button" onclick="contarPalavras()">Contar Palavras</button>
+    </form>
+
+    <p id="resultado"></p>
+
+    <script>
+        function contarPalavras() {
+            const fraseInput = document.getElementById('frase').value;
+            
+            // Remove espaços em branco extras e divide a frase em palavras usando espaços como delimitadores
+            const palavrasArray = fraseInput.trim().split(/\s+/);
+
+            const resultado = document.getElementById('resultado');
+
+            if (palavrasArray.length > 0 && palavrasArray[0] !== "") {
+                resultado.textContent = 'Resultado: A frase possui ' + palavrasArray.length + ' palavra(s).';
+            } else {
+                resultado.textContent = 'Resultado: A frase não possui palavras.';
+            }
+        }
+    </script>
+</body>
+</html>

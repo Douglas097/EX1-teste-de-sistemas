@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Soma dos Números Pares</title>
+</head>
+<body>
+    <h1>Soma dos Números Pares</h1>
+
+    <form id="somaForm">
+        <label for="numeros">Digite a lista de números separados por vírgula:</label>
+        <input type="text" id="numeros" name="numeros" required>
+        <button type="button" onclick="calcularSoma()">Calcular</button>
+    </form>
+
+    <p id="resultado"></p>
+
+    <script>
+        function calcularSoma() {
+            const numerosInput = document.getElementById('numeros').value;
+            const numerosArray = numerosInput.split(',').map(Number);
+
+            let soma = 0;
+
+            for (let i = 0; i < numerosArray.length; i++) {
+                if (numerosArray[i] % 2 === 0) {
+                    soma += numerosArray[i];
+                }
+            }
+
+            const resultado = document.getElementById('resultado');
+
+            if (soma > 0) {
+                resultado.textContent = 'Resultado: A soma dos números pares é ' + soma + '.';
+            } else {
+                resultado.textContent = 'Resultado: A lista não contém números pares.';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Validador de Senha</title>
+    <script>
+        function validarSenha() {
+            const senha = document.getElementById("senha").value;
+            const regexMaiuscula = /[A-Z]/;
+            const regexMinuscula = /[a-z]/;
+            const regexNumero = /[0-9]/;
+
+            if (senha.length < 8) {
+                document.getElementById("resultado").innerHTML = "Resultado: A senha deve ter pelo menos 8 caracteres.";
+            } else if (!regexMaiuscula.test(senha) || !regexMinuscula.test(senha)) {
+                document.getElementById("resultado").innerHTML = "Resultado: A senha deve conter pelo menos uma letra maiúscula e uma letra minúscula.";
+            } else if (!regexNumero.test(senha)) {
+                document.getElementById("resultado").innerHTML = "Resultado: A senha deve conter pelo menos um número.";
+            } else {
+                document.getElementById("resultado").innerHTML = "Resultado: A senha é válida.";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Validador de Senha</h1>
+    <label for="senha">Digite a senha para validar:</label>
+    <input type="password" id="senha">
+    <button onclick="validarSenha()">Validar</button>
+    <p id="resultado"></p>
+</body>
+</html>

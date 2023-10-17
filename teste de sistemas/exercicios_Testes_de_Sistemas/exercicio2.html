@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contagem de Vogais</title>
+    <script>
+        // Função para contar o número de vogais em uma frase
+        function contarVogais() {
+            const inputFrase = document.getElementById('frase');
+            const resultado = document.getElementById('resultado');
+
+            // Obtém a frase inserida pelo usuário
+            const frase = inputFrase.value.toLowerCase(); // Converte a frase para letras minúsculas
+
+            // Define as vogais
+            const vogais = "aeiou";
+
+            // Inicializa um contador para vogais
+            let contadorVogais = 0;
+
+            // Itera através da frase e verifica se cada caractere é uma vogal
+            for (let i = 0; i < frase.length; i++) {
+                if (vogais.includes(frase[i])) {
+                    contadorVogais++;
+                }
+            }
+
+            // Exibe o resultado
+            if (contadorVogais > 0) {
+                resultado.innerHTML = `Resultado: A frase possui ${contadorVogais} vogais.`;
+            } else {
+                resultado.innerHTML = "Resultado: A frase não possui vogais.";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Contagem de Vogais</h1>
+    <label for="frase">Digite uma frase: </label>
+    <input type="text" id="frase" />
+    <button onclick="contarVogais()">Contar Vogais</button>
+    <p id="resultado"></p>
+</body>
+</html>

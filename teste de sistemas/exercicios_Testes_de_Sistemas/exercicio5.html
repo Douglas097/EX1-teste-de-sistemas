@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Média de uma Lista de Números</title>
+</head>
+<body>
+    <h1>Média de uma Lista de Números</h1>
+
+    <form id="mediaForm">
+        <label for="numeros">Digite a lista de números separados por vírgula:</label>
+        <input type="text" id="numeros" name="numeros" required>
+        <button type="button" onclick="calcularMedia()">Calcular Média</button>
+    </form>
+
+    <p id="resultado"></p>
+
+    <script>
+        function calcularMedia() {
+            const numerosInput = document.getElementById('numeros').value;
+            const numerosArray = numerosInput.split(',').map(Number);
+
+            if (numerosArray.length === 0 || isNaN(numerosArray[0])) {
+                const resultado = document.getElementById('resultado');
+                resultado.textContent = 'Resultado: A lista está vazia, não é possível calcular a média.';
+                return;
+            }
+
+            const soma = numerosArray.reduce((acumulador, numero) => acumulador + numero, 0);
+            const media = soma / numerosArray.length;
+
+            const resultado = document.getElementById('resultado');
+            resultado.textContent = 'Resultado: A média dos números é ' + media.toFixed(2) + '.';
+        }
+    </script>
+</body>
+</html>

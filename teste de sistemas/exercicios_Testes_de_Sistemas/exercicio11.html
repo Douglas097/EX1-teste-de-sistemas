@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jogo da Forca</title>
+    <script>
+        const palavras = ["elefante", "banana", "computador", "programacao", "javascript"];
+        let palavraEscolhida = "";
+        let letrasCorretas = [];
+        let tentativasRestantes = 6;
+
+        function iniciarJogo() {
+            // Escolher uma palavra aleatória
+            palavraEscolhida = palavras[Math.floor(Math.random() * palavras.length)];
+            letrasCorretas = [];
+            tentativasRestantes = 6;
+
+            // Exibir a dica (opcional)
+            const dica = document.getElementById("dica");
+            dica.innerHTML = "Dica: A palavra tem " + palavraEscolhida.length + " letras.";
+
+            // Limpar o campo de entrada e a saída
+            document.getElementById("letra").value = "";
+            document.getElementById("resultado").innerHTML = "";
+
+            // Desenhar a forca vazia
+            const forca = document.getElementById("forca");
+            forca.innerHTML = "";
+            for (let i = 0; i < palavraEscolhida.length; i++) {
+                forca.innerHTML += "_ ";
+            }
+        }
+
+        function jogar() {
+            const letra = document.getElementById("letra").value.toLowerCase();
+            document.getElementById("letra").value = "";
+
+            if (palavraEscolhida.includes(letra)) {
+                // A letra está correta
+                letrasCorretas.push(letra);
+
+                // Atualizar a exibição da palavra com as letras corretas
+                const forca = document.getElementById("forca");
+                let novaPalavra = "";
+                for (let i = 0; i < palavraEscolhida.length; i++) {
+                    if (letrasCorretas.includes(palavraEscolhida[i])) {
+                        novaPalavra += palavraEscolhida[i] + " ";
+                    } else {
+                        novaPalavra += "_ ";
+                    }
+                }
+                forca.innerHTML = novaPalavra;
+
+                // Verificar se o jogador ganhou
+                if (!novaPalavra.includes("_")) {
+                    document.getElementById("resultado").innerHTML = "Resultado: Parabéns, você adivinhou a palavra!";
+                }
+            } else {
+                // A letra está incorreta
+                tentativasRestantes--;
+                atualizarForca();
+
+                if (tentativasRestantes === 0) {
+                    document.getElementById("resultado").innerHTML = "Resultado: Você esgotou suas tentativas. A palavra era \"" + palavraEscolhida + "\".";
+                }
+            }
+        }
+
+        function atualizarForca() {
+            const forca = document.getElementById("forca");
+            const desenhos = [
+                "   _____",
+                "  |     |",
+                "  |     " + (tentativasRestantes < 6 ? "O" : " "),
+                "  |    " + (tentativasRestantes < 4 ? "/" : " ") + (tentativasRestantes < 5 ? "|" : " ") + (tentativasRestantes < 3 ? "\\" : " "),
+                "  |    " + (tentativasRestantes < 2 ? "/" : " ") + " " + (tentativasRestantes < 1 ? "\\" : " "),
+                "  |",
+                "__|__"
+            ];
+
+            forca.innerHTML = "";
+            for (let i = 0; i < desenhos.length; i++) {
+                forca.innerHTML += desenhos[i] + "<br>";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Jogo da Forca</h1>
+    <button onclick="iniciarJogo()">Iniciar Jogo</button>
+    <p id="dica"></p>
+    <div id="forca"></div>
+    <label for="letra">Digite uma letra:</label>
+    <input type="text" id="letra" maxlength="1">
+    <button onclick="jogar()">Jogar</button>
+    <p id="resultado"></p>
+</body>
+</html>

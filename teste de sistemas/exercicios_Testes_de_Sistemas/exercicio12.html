@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simulador de Banco</title>
+</head>
+<body>
+    <h1>Simulador de Banco</h1>
+    
+    <h2>Saldo Inicial: R$ <span id="saldo">500</span></h2>
+
+    <h3>Depósito:</h3>
+    <input type="number" id="deposito" placeholder="Valor do depósito">
+    <button onclick="realizarDeposito()">Depositar</button>
+
+    <h3>Saque:</h3>
+    <input type="number" id="saque" placeholder="Valor do saque">
+    <button onclick="realizarSaque()">Sacar</button>
+
+    <h2>Resultado: <span id="resultado"></span></h2>
+
+    <script>
+        let saldoAtual = 500;
+
+        function realizarDeposito() {
+            const valorDeposito = parseFloat(document.getElementById("deposito").value);
+            if (!isNaN(valorDeposito) && valorDeposito > 0) {
+                saldoAtual += valorDeposito;
+                document.getElementById("saldo").textContent = saldoAtual.toFixed(2);
+                document.getElementById("resultado").textContent = "Saldo atual: R$ " + saldoAtual.toFixed(2);
+            }
+        }
+
+        function realizarSaque() {
+            const valorSaque = parseFloat(document.getElementById("saque").value);
+            if (!isNaN(valorSaque) && valorSaque > 0) {
+                if (valorSaque <= saldoAtual) {
+                    saldoAtual -= valorSaque;
+                    document.getElementById("saldo").textContent = saldoAtual.toFixed(2);
+                    document.getElementById("resultado").textContent = "Saldo atual: R$ " + saldoAtual.toFixed(2);
+                } else {
+                    document.getElementById("resultado").textContent = "Saldo insuficiente para realizar o saque.";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
